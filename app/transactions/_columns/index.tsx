@@ -4,7 +4,7 @@ import { Transaction } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import TransactionTypeBadge from "../_components/type-badge"
 import { Button } from "@/app/_components/ui/button";
-import { TrashIcon } from "lucide-react";
+import { PencilIcon, TrashIcon } from "lucide-react";
 
  export const TRANSACTION_CATEGORY_LABELS = {
   EDUCATION: "Educação",
@@ -74,12 +74,15 @@ export const transactioncolumns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey:'actions',
-    header: "ações",
+    header: "Ações",
     cell: () => {
       return (
-        <div>
-        <Button variant="ghost">
-          <TrashIcon />
+        <div className="space-x-1">
+        <Button variant="ghost" size="icon"className="text-muted-foreground">
+          <PencilIcon />
+        </Button>
+        <Button variant="ghost" size="icon"className="text-muted-foreground">
+          <TrashIcon /> 
         </Button>
       </div>
       )

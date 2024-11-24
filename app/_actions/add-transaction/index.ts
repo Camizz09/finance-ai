@@ -14,9 +14,7 @@ interface AddTransactionParams {
     date: Date;
 }
 
-export const addTransaction = async (
-    params: AddTransactionParams
-) => {
+export const addTransaction = async (params: AddTransactionParams) => {
     addTransactionSchema.parse(params)
     const { userId } = await auth();
     if (!userId) {

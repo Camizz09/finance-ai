@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const addTransactionSchema = z.object({
     name: z.string().trim().min(1),
-    amount: z.string().trim().min(1),
+    amount: z.number(),
     type: z.nativeEnum(TransactionType, {
         required_error: "O tipo é obrigatório.",
     }),

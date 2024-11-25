@@ -30,7 +30,7 @@ const Navbar = () => {
         >
             Transações
             </Link>
-        <Link href="/subscriptions" 
+        <Link href="/subscription" 
         className={
             pathname == "/subscription" 
             ? "text-primary font-bold" 

@@ -19,11 +19,9 @@ Organize, analise e tome decisões com base em dados claros e gráficos interati
 ## 🚀 Tecnologias utilizadas
 - ⚛ **React** (com Hooks e Context API)
 - 🟦 **TypeScript**
-- 🎨 **Styled Components** *(ou outra tecnologia de estilização utilizada)*
-- ⚡ **Vite** *(ou Next.js, se for o caso)*
-- 📡 **Axios** *(para consumo de API, se aplicável)*
-- 📊 **Chart.js** *(ou biblioteca equivalente para gráficos)*
-- 💾 **Local Storage** *(ou integração com backend)*
+- 🎨 **Shadcn Components** 
+- ⚡ **Next.js** 
+- 📊 **Chart.js**
 
 ---
 

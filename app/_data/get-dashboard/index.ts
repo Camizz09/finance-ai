@@ -1,31 +1,18 @@
 import { db } from "@/app/_lib/prisma";
 import { TransactionType } from "@prisma/client";
-import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
+import { TransactionPercentagePerType } from "./types";
+import { auth } from "@clerk/nextjs/server";
 
 export const getDashboard = async (month: string) => {
-  //     export const getDashboard = async (month: string) => {
-  //   const where = {
-  //     date: {
-  //       gte: new Date(`2025-${month}-01`),
-  //       lt: new Date(`2025-${month}-31`),
-  //     },
-  //   };
-
-  // Antes estava fixo para 2025, e por isso alguns meses vinham zerados.
-  // Agora o ano é sempre o atual, assim não importa se estamos em 2024, 2025 ou mais pra frente.
-  const year = new Date().getFullYear();
-
-  // Calcula o primeiro dia do mês que foi selecionado
-  const startDate = new Date(year, Number(month) - 1, 1);
-
-  // Calcula automaticamente o último dia do mês (não importa se é fevereiro, abril, etc.)
-  const endDate = new Date(year, Number(month), 0);
-
-  // Filtro de busca usando as datas dinâmicas
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
   const where = {
+    userId,
     date: {
-      gte: startDate, // de...
-      lte: endDate, // até...
+      gte: new Date(`2025-${month}-01`),
+      lt: new Date(`2025-${month}-31`),
     },
   };
   const depositsTotal = Number(

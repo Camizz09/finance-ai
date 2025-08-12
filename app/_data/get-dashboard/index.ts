@@ -1,6 +1,6 @@
 import { db } from "@/app/_lib/prisma";
 import { TransactionType } from "@prisma/client";
-import { TransactionPercentagePerType } from "./types";
+import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 import { auth } from "@clerk/nextjs/server";
 
 export const getDashboard = async (month: string) => {

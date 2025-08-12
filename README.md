@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 💰 Finance AI
 
-First, run the development server:
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Tech](https://img.shields.io/badge/made%20with-React%20%26%20TypeScript-blue)
+![PRs](https://img.shields.io/badge/PRs-bem%20vindos-brightgreen)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Dashboard inteligente para controle financeiro**  
+Organize, analise e tome decisões com base em dados claros e gráficos interativos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img src="https://img.shields.io/badge/💻_Preview-Aqui-important" />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+</div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 Tecnologias utilizadas
+- ⚛ **React** (com Hooks e Context API)
+- 🟦 **TypeScript**
+- 🎨 **Shadcn Components** 
+- ⚡ **Next.js** 
+- 📊 **Chart.js**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📸 Preview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> *<img width="1861" height="924" alt="image" src="https://github.com/user-attachments/assets/144c1d23-6751-4d5f-97c3-2a35b27f5b9c" />
+*
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Funcionalidades
+✔ **Dashboard interativo** com gráficos de receitas e despesas  
+✔ **Cadastro, edição e exclusão** de transações  
+✔ **Filtros avançados** por data, tipo e categoria  
+✔ **Design responsivo** (mobile, tablet e desktop)  
+✔ **Resumo automático** do saldo total e estatísticas  
+✔ **Armazenamento local** ou sincronização com banco de dados  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+<div align="center"> Feito com ❤️ por <a href="https://github.com/Camizz09">Camilla Dávyla</a> 🚀 </div> ```

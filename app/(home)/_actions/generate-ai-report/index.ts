@@ -20,11 +20,19 @@ export const generateAiReport = async ({ month }: GenerateAiReportSchema) => {
     apiKey: process.env.OPENAI_API_KEY,
   });
   // pegar as transações do mês recebido
+  const startDate = new Date(`2025-${month}-01`);
+  const endDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth() + 1,
+    1,
+  );
+
   const transactions = await db.transaction.findMany({
     where: {
+      userId, // 🔑 pega só do usuário logado
       date: {
-        gte: new Date(`2025-${month}-01`),
-        lt: new Date(`2025-${month}-31`),
+        gte: startDate,
+        lt: endDate,
       },
     },
   });

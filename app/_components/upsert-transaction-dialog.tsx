@@ -7,6 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "./ui/dialog";
 import {
   Form,
@@ -30,12 +31,12 @@ import {
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from "../_constants/transactions";
-import { DatePicker } from "./ui/date-picker";
+import { DatePicker } from "./ui/date-picker"; // Seu componente está correto
 import { z } from "zod";
 import {
+  TransactionType,
   TransactionCategory,
   TransactionPaymentMethod,
-  TransactionType,
 } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -83,14 +84,22 @@ const UpsertTransactionDialog = ({
 }: UpsertTransactionDialogProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues ?? {
-      amount: 0,
-      category: TransactionCategory.OTHER,
-      date: new Date(),
-      name: "",
-      paymentMethod: TransactionPaymentMethod.CASH,
-      type: TransactionType.EXPENSE,
-    },
+    // AQUI ESTÁ A ÚNICA CORREÇÃO NECESSÁRIA
+    defaultValues: defaultValues
+      ? {
+          ...defaultValues,
+          // Converte a string de data inicial para um objeto Date
+          date: defaultValues.date ? new Date(defaultValues.date) : new Date(),
+        }
+      : {
+          // Valores padrão para criar uma nova transação
+          amount: 0,
+          category: TransactionCategory.OTHER,
+          date: new Date(),
+          name: "",
+          paymentMethod: TransactionPaymentMethod.CASH,
+          type: TransactionType.EXPENSE,
+        },
   });
 
   const onSubmit = async (data: FormSchema) => {
@@ -115,16 +124,19 @@ const UpsertTransactionDialog = ({
         }
       }}
     >
+      <DialogTrigger asChild></DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
             {isUpdate ? "Atualizar" : "Criar"} transação
           </DialogTitle>
-          <DialogDescription>Insira as Informações Abaixo</DialogDescription>
+          <DialogDescription>Insira as informações abaixo</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            {/* ... Seus outros FormFields ... */}
+
             <FormField
               control={form.control}
               name="name"
@@ -171,7 +183,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="" />
+                        <SelectValue placeholder="Selecione o tipo..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -198,7 +210,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione uma categoria..." />
+                        <SelectValue placeholder="Selecione a categoria..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -218,14 +230,14 @@ const UpsertTransactionDialog = ({
               name="paymentMethod"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Método de Pagamento</FormLabel>
+                  <FormLabel>Método de pagamento</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione um Método de Pagamento..." />
+                        <SelectValue placeholder="Selecione um método de pagamento..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -240,18 +252,17 @@ const UpsertTransactionDialog = ({
                 </FormItem>
               )}
             />
+
+            {/* O FormField da data NÃO precisa de alterações */}
             <FormField
               control={form.control}
               name="date"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Data</FormLabel>
-                  <DatePicker
-                    value={field.value ? new Date(field.value) : undefined}
-                    onChange={(value) =>
-                      field.onChange(value ? new Date(value) : null)
-                    }
-                  />
+                  <FormControl>
+                    <DatePicker value={field.value} onChange={field.onChange} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

@@ -1,19 +1,18 @@
-import { db } from "@/app/_lib/prisma";
+import { db } from "../_lib/prisma";
 import { DataTable } from "../_components/ui/data-table";
-import { transactioncolumns } from "./_columns";
+import AddTransactionButton from "../_components/add-transaction-button";
 import Navbar from "../_components/navbar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../_components/ui/scroll-area";
-import AddTransactionButton from "../_components/add-transaction-button";
 import { canUserAddTransaction } from "../_data/can-user-add-transaction";
+import { transactioncolumns } from "./_columns";
 
 const TransactionsPage = async () => {
   const { userId } = await auth();
   if (!userId) {
     redirect("/login");
   }
-  // Acessar as transações do meu banco de dados
   const transactions = await db.transaction.findMany({
     where: {
       userId,
@@ -32,14 +31,12 @@ const TransactionsPage = async () => {
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         </div>
-        <div>
-          <ScrollArea className="max-h-[70vh]">
-            <DataTable
-              columns={transactioncolumns}
-              data={JSON.parse(JSON.stringify(transactions))}
-            />
-          </ScrollArea>
-        </div>
+        <ScrollArea className="max-h-[calc(100vh-180px)]">
+          <DataTable
+            columns={transactioncolumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
+        </ScrollArea>
       </div>
     </>
   );
